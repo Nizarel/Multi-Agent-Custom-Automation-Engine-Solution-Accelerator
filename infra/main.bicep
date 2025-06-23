@@ -159,7 +159,7 @@ param aiFoundryAiProjectConfiguration aiProjectConfigurationType = {
 @description('Optional. The configuration to apply for the Cosmos DB Account resource.')
 param cosmosDbAccountConfiguration cosmosDbAccountConfigurationType = {
   enabled: true
-  name: 'cosmos-${solutionPrefix}'
+  name: 'cosmos-${toLower(solutionPrefix)}'
   location: solutionLocation
   tags: tags
   subnetResourceId: null //Default value set on module configuration
@@ -169,7 +169,7 @@ param cosmosDbAccountConfiguration cosmosDbAccountConfigurationType = {
 @description('Optional. The configuration to apply for the Container App Environment resource.')
 param containerAppEnvironmentConfiguration containerAppEnvironmentConfigurationType = {
   enabled: true
-  name: 'cae-${solutionPrefix}'
+  name: 'cae-${toLower(solutionPrefix)}'
   location: solutionLocation
   tags: tags
   subnetResourceId: null //Default value set on module configuration
@@ -178,7 +178,7 @@ param containerAppEnvironmentConfiguration containerAppEnvironmentConfigurationT
 @description('Optional. The configuration to apply for the Container App resource.')
 param containerAppConfiguration containerAppConfigurationType = {
   enabled: true
-  name: 'ca-${solutionPrefix}'
+  name: 'ca-${toLower(solutionPrefix)}'
   location: solutionLocation
   tags: tags
   environmentResourceId: null //Default value set on module configuration
@@ -893,7 +893,7 @@ module privateDnsZonesCosmosDb 'br/public:avm/res/network/private-dns-zone:0.7.0
 }
 
 var cosmosDbAccountEnabled = cosmosDbAccountConfiguration.?enabled ?? true
-var cosmosDbResourceName = cosmosDbAccountConfiguration.?name ?? 'cosmos-${solutionPrefix}'
+var cosmosDbResourceName = cosmosDbAccountConfiguration.?name ?? 'cosmos-${toLower(solutionPrefix)}'
 var cosmosDbDatabaseName = 'macae'
 var cosmosDbDatabaseMemoryContainerName = 'memory'
 module cosmosDb 'br/public:avm/res/document-db/database-account:0.12.0' = if (cosmosDbAccountEnabled) {
@@ -972,7 +972,7 @@ module cosmosDb 'br/public:avm/res/document-db/database-account:0.12.0' = if (co
 // ========== Backend Container App Environment ========== //
 // WAF best practices for container apps: https://learn.microsoft.com/en-us/azure/well-architected/service-guides/azure-container-apps
 var containerAppEnvironmentEnabled = containerAppEnvironmentConfiguration.?enabled ?? true
-var containerAppEnvironmentResourceName = containerAppEnvironmentConfiguration.?name ?? 'cae-${solutionPrefix}'
+var containerAppEnvironmentResourceName = containerAppEnvironmentConfiguration.?name ?? 'cae-${toLower(solutionPrefix)}'
 module containerAppEnvironment 'modules/container-app-environment.bicep' = if (containerAppEnvironmentEnabled) {
   name: take('module.container-app-environment.${containerAppEnvironmentResourceName}', 64)
   params: {
@@ -1000,7 +1000,7 @@ module containerAppEnvironment 'modules/container-app-environment.bicep' = if (c
 // ========== Backend Container App Service ========== //
 // WAF best practices for container apps: https://learn.microsoft.com/en-us/azure/well-architected/service-guides/azure-container-apps
 var containerAppEnabled = containerAppConfiguration.?enabled ?? true
-var containerAppResourceName = containerAppConfiguration.?name ?? 'ca-${solutionPrefix}'
+var containerAppResourceName = containerAppConfiguration.?name ?? 'ca-${toLower(solutionPrefix)}'
 module containerApp 'br/public:avm/res/app/container-app:0.14.2' = if (containerAppEnabled) {
   name: take('avm.res.app.container-app.${containerAppResourceName}', 64)
   params: {
