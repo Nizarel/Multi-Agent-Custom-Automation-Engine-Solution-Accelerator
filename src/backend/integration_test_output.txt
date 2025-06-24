@@ -1,0 +1,70 @@
+2025-06-24 01:38:35,003 - __main__ - INFO - Starting MCP Server and Tools Testing
+2025-06-24 01:38:35,003 - __main__ - INFO - Testing Azure SQL MCP Server Connection
+2025-06-24 01:38:35,004 - __main__ - INFO - Server URL: https://mcp-azsql-server.mangograss-c63d0418.eastus2.azurecontainerapps.io/mcp
+2025-06-24 01:38:35,004 - __main__ - INFO - Transport type: sse
+2025-06-24 01:38:35,004 - __main__ - INFO - Creating smart MCP client...
+2025-06-24 01:38:35,004 - mcp.client - INFO - Using EnhancedMCPClient with HTTP transport
+2025-06-24 01:38:35,280 - httpx - INFO - HTTP Request: POST https://mcp-azsql-server.mangograss-c63d0418.eastus2.azurecontainerapps.io/mcp "HTTP/1.1 200 OK"
+2025-06-24 01:38:35,280 - mcp.client - INFO - Discovered 3 unique tools
+2025-06-24 01:38:35,280 - mcp.client - INFO - Connected to MCP server: default
+2025-06-24 01:38:35,281 - __main__ - INFO - Successfully connected to MCP server
+2025-06-24 01:38:35,281 - __main__ - INFO - Testing tool discovery...
+2025-06-24 01:38:35,281 - __main__ - INFO - Available tools: ['ListTables', 'ReadData', 'DescribeTable']
+2025-06-24 01:38:35,281 - __main__ - INFO - Testing health check...
+2025-06-24 01:38:35,359 - httpx - INFO - HTTP Request: POST https://mcp-azsql-server.mangograss-c63d0418.eastus2.azurecontainerapps.io/mcp "HTTP/1.1 200 OK"
+2025-06-24 01:38:35,360 - __main__ - INFO - Health check result: True
+2025-06-24 01:38:35,360 - __main__ - INFO - Testing ListTables tool...
+2025-06-24 01:38:35,429 - httpx - INFO - HTTP Request: POST https://mcp-azsql-server.mangograss-c63d0418.eastus2.azurecontainerapps.io/mcp "HTTP/1.1 200 OK"
+2025-06-24 01:38:35,429 - __main__ - INFO - Tables result: {'success': True, 'data': ['dev.cliente', 'dev.cliente_cedi', 'dev.mercado', 'dev.producto', 'dev.segmentacion', 'dev.tiempo']}
+2025-06-24 01:38:35,429 - __main__ - INFO - Testing ReadData tool with simple query...
+2025-06-24 01:38:35,506 - httpx - INFO - HTTP Request: POST https://mcp-azsql-server.mangograss-c63d0418.eastus2.azurecontainerapps.io/mcp "HTTP/1.1 200 OK"
+2025-06-24 01:38:35,507 - __main__ - INFO - Query result: {'success': True, 'data': [{'customer_id': '-1', 'calday': '2025-01-25T00:00:00', 'net_revenue': 0}, {'customer_id': '-1', 'calday': '2025-01-25T00:00:00', 'net_revenue': 0}, {'customer_id': '-1', 'calday': '2025-01-25T00:00:00', 'net_revenue': 0}]}
+2025-06-24 01:38:35,507 - __main__ - INFO - Testing ReadData tool with count query on cliente table...
+2025-06-24 01:38:35,727 - httpx - INFO - HTTP Request: POST https://mcp-azsql-server.mangograss-c63d0418.eastus2.azurecontainerapps.io/mcp "HTTP/1.1 200 OK"
+2025-06-24 01:38:35,728 - __main__ - INFO - Count result: {'success': True, 'data': [{'client_count': 952028}]}
+2025-06-24 01:38:35,729 - __main__ - INFO - Testing server info...
+2025-06-24 01:38:35,729 - __main__ - INFO - Server info: {'server_name': 'default', 'url': 'https://mcp-azsql-server.mangograss-c63d0418.eastus2.azurecontainerapps.io/mcp', 'type': 'http'}
+2025-06-24 01:38:35,729 - mcp.client - INFO - Disconnected from MCP server
+2025-06-24 01:38:35,730 - __main__ - INFO - All tests completed successfully!
+2025-06-24 01:38:35,730 - __main__ - INFO - Testing enhanced data analysis tools...
+2025-06-24 01:38:35,952 - httpx - INFO - HTTP Request: POST https://mcp-azsql-server.mangograss-c63d0418.eastus2.azurecontainerapps.io/mcp "HTTP/1.1 200 OK"
+2025-06-24 01:38:35,953 - mcp.client - INFO - Discovered 3 unique tools
+2025-06-24 01:38:35,953 - mcp.client - INFO - Connected to MCP server: default
+2025-06-24 01:38:35,953 - __main__ - INFO - Testing schema exploration...
+2025-06-24 01:38:36,022 - httpx - INFO - HTTP Request: POST https://mcp-azsql-server.mangograss-c63d0418.eastus2.azurecontainerapps.io/mcp "HTTP/1.1 200 OK"
+2025-06-24 01:38:36,022 - __main__ - INFO - Schema exploration result: {'total_tables': 0, 'tables': []}
+2025-06-24 01:38:36,022 - __main__ - INFO - Testing custom query execution...
+2025-06-24 01:38:36,098 - httpx - INFO - HTTP Request: POST https://mcp-azsql-server.mangograss-c63d0418.eastus2.azurecontainerapps.io/mcp "HTTP/1.1 200 OK"
+2025-06-24 01:38:36,099 - __main__ - INFO - Custom query result: {'success': True, 'rows_returned': 5, 'data': [{'customer_id': '-1', 'net_revenue': 0}, {'customer_id': '-1', 'net_revenue': 0}, {'customer_id': '-1', 'net_revenue': 0}, {'customer_id': '-1', 'net_revenue': 0}, {'customer_id': '-1', 'net_revenue': 0}], 'query': 'SELECT TOP 5 customer_id, net_revenue FROM dev.segmentacion', 'columns': []}
+2025-06-24 01:38:36,100 - __main__ - INFO - Testing data quality report...
+2025-06-24 01:38:36,504 - httpx - INFO - HTTP Request: POST https://mcp-azsql-server.mangograss-c63d0418.eastus2.azurecontainerapps.io/mcp "HTTP/1.1 200 OK"
+2025-06-24 01:38:36,651 - httpx - INFO - HTTP Request: POST https://mcp-azsql-server.mangograss-c63d0418.eastus2.azurecontainerapps.io/mcp "HTTP/1.1 200 OK"
+2025-06-24 01:38:44,146 - httpx - INFO - HTTP Request: POST https://mcp-azsql-server.mangograss-c63d0418.eastus2.azurecontainerapps.io/mcp "HTTP/1.1 200 OK"
+2025-06-24 01:38:44,147 - __main__ - INFO - Data quality report: {'segmentacion_table': {'total_rows': 10000, 'unique_customers': 1, 'unique_products': 692, 'unique_dates': 32, 'null_revenue_count': 0, 'earliest_date': '2025-01-25T00:00:00', 'latest_date': '2025-03-17T00:00:00'}, 'cliente_table': {'total_clients': 1000, 'unique_channels': 0, 'unique_territories': 0, 'null_names_count': 1}, 'producto_table': {'total_products': 1000, 'unique_categories': 4, 'unique_brands': 29, 'null_product_names': 0}, 'overall_quality': 'good', 'successful_tables': 3, 'total_tables_checked': 3}
+2025-06-24 01:38:44,147 - mcp.client - INFO - Disconnected from MCP server
+2025-06-24 01:38:44,147 - __main__ - INFO - Data tools tests completed!
+2025-06-24 01:38:44,147 - __main__ - INFO - Testing enhanced sales analysis tools...
+2025-06-24 01:38:44,357 - httpx - INFO - HTTP Request: POST https://mcp-azsql-server.mangograss-c63d0418.eastus2.azurecontainerapps.io/mcp "HTTP/1.1 200 OK"
+2025-06-24 01:38:44,357 - mcp.client - INFO - Discovered 3 unique tools
+2025-06-24 01:38:44,357 - mcp.client - INFO - Connected to MCP server: default
+2025-06-24 01:38:44,357 - __main__ - INFO - Testing sales performance analysis...
+2025-06-24 01:38:44,434 - httpx - INFO - HTTP Request: POST https://mcp-azsql-server.mangograss-c63d0418.eastus2.azurecontainerapps.io/mcp "HTTP/1.1 200 OK"
+2025-06-24 01:38:44,579 - httpx - INFO - HTTP Request: POST https://mcp-azsql-server.mangograss-c63d0418.eastus2.azurecontainerapps.io/mcp "HTTP/1.1 200 OK"
+2025-06-24 01:38:44,597 - httpx - INFO - HTTP Request: POST https://mcp-azsql-server.mangograss-c63d0418.eastus2.azurecontainerapps.io/mcp "HTTP/1.1 200 OK"
+2025-06-24 01:38:44,617 - httpx - INFO - HTTP Request: POST https://mcp-azsql-server.mangograss-c63d0418.eastus2.azurecontainerapps.io/mcp "HTTP/1.1 200 OK"
+2025-06-24 01:38:44,618 - __main__ - INFO - Sales performance result: {'analysis_period': 'last_30_days', 'date_range': '2025-05-25 to 2025-06-24', 'performance_metrics': {'error': "Incorrect syntax near '?'."}, 'sales_trends': [{'period': 13, 'revenue': 0, 'transactions': 5000, 'customers': 1}], 'top_customers': [{'customer_id': '-1', 'customer_name': None, 'channel': None, 'territory': None, 'total_revenue': 0, 'total_orders': 5000, 'avg_order_value': 0}], 'top_products': [], 'insights': ['Top customer: None with $0.00 revenue']}
+2025-06-24 01:38:44,618 - __main__ - INFO - Testing customer insights...
+2025-06-24 01:38:44,717 - httpx - INFO - HTTP Request: POST https://mcp-azsql-server.mangograss-c63d0418.eastus2.azurecontainerapps.io/mcp "HTTP/1.1 200 OK"
+2025-06-24 01:38:44,718 - __main__ - INFO - Customer insights result: {'top_customers': [{'customer_id': '-1', 'customer_name': None, 'channel': None, 'territory': None, 'total_revenue': 0, 'total_orders': 5000, 'avg_order_value': 0}], 'total_customers_analyzed': 1, 'type': 'top_customers_overview'}
+2025-06-24 01:38:44,718 - __main__ - INFO - Testing product insights...
+2025-06-24 01:38:44,798 - httpx - INFO - HTTP Request: POST https://mcp-azsql-server.mangograss-c63d0418.eastus2.azurecontainerapps.io/mcp "HTTP/1.1 200 OK"
+2025-06-24 01:38:44,798 - __main__ - INFO - Product insights result: {'top_products': [], 'total_products_analyzed': 0, 'type': 'top_products_overview'}
+2025-06-24 01:38:44,799 - mcp.client - INFO - Disconnected from MCP server
+2025-06-24 01:38:44,799 - __main__ - INFO - Sales tools tests completed!
+2025-06-24 01:38:44,799 - __main__ - INFO - ==================================================
+2025-06-24 01:38:44,799 - __main__ - INFO - TEST SUMMARY
+2025-06-24 01:38:44,799 - __main__ - INFO - ==================================================
+2025-06-24 01:38:44,799 - __main__ - INFO - server_connection: ✅ PASSED
+2025-06-24 01:38:44,799 - __main__ - INFO - data_tools: ✅ PASSED
+2025-06-24 01:38:44,799 - __main__ - INFO - sales_tools: ✅ PASSED
+2025-06-24 01:38:44,799 - __main__ - INFO - Overall result: ✅ ALL TESTS PASSED

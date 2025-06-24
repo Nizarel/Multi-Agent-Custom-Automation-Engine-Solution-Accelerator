@@ -1,0 +1,5 @@
+# Test requirements for MCP module
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-mock>=3.11.0
+httpx>=0.25.0

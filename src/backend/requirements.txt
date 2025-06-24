@@ -21,6 +21,11 @@ azure-ai-inference==1.0.0b9
 azure-search-documents 
 azure-ai-evaluation
 
+# Enhanced MCP client support
+fastmcp>=2.9.0
+httpx>=0.28.0
+pydantic>=2.11.6
+
 opentelemetry-exporter-otlp-proto-grpc
 
 # Testing tools
