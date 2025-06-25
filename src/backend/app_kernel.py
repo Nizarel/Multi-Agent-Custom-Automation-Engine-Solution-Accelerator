@@ -81,6 +81,41 @@ app.add_middleware(HealthCheckMiddleware, password="", checks={})
 logging.info("Added health check middleware")
 
 
+@app.on_event("startup")
+async def startup_event():
+    """Initialize services on application startup."""
+    logger = logging.getLogger(__name__)
+    logger.info("🚀 Starting Multi-Agent Custom Automation Engine...")
+    
+    try:
+        # Initialize MCP Integration Service for Revenue Performance Tools
+        from services.mcp_integration_service import initialize_mcp_service
+        await initialize_mcp_service()
+        logger.info("✅ MCP Integration Service initialized successfully")
+    except Exception as e:
+        logger.warning(f"⚠️ MCP Integration Service initialization failed: {e}")
+        logger.info("📝 Revenue Performance Tools will use fallback data")
+    
+    logger.info("🎯 Application startup completed")
+
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    """Clean up services on application shutdown."""
+    logger = logging.getLogger(__name__)
+    logger.info("🔄 Shutting down Multi-Agent Custom Automation Engine...")
+    
+    try:
+        # Shutdown MCP Integration Service
+        from services.mcp_integration_service import shutdown_mcp_service
+        await shutdown_mcp_service()
+        logger.info("✅ MCP Integration Service shutdown successfully")
+    except Exception as e:
+        logger.warning(f"⚠️ Error during MCP service shutdown: {e}")
+    
+    logger.info("👋 Application shutdown completed")
+
+
 @app.post("/api/input_task")
 async def input_task_endpoint(input_task: InputTask, request: Request):
     """
